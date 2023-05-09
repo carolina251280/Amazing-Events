@@ -1,0 +1,28 @@
+html{
+    width: 100% !important;
+    height: 100vh !important;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100% !important;    
+}
+
+main{
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: auto;
+}
+
+.card-title{
+    font-family: 'Anton', sans-serif;
+}
+.card-text{
+    font-family: 'Questrial', sans-serif;
+}
+
+.titulo {
+    display: none;
+  }
