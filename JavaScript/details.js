@@ -1,16 +1,12 @@
-var id = location.search.split("?id=").filter(Number);
-//console.log(id)
-var selectId = id[0];
-
-const detalleEvento = [];
-
+const querySearch = document.location.search
+console.log(querySearch);
+const id = new URLSearchParams(querySearch).get("id")
+console.log(id)
 
 fetch ('https://amd-amazingevents-api.onrender.com/api/eventos')
 .then(response => response.json())
 .then (data => {
-const eventos = data.events.find(event => event._id == id)
-
-console.log(eventos)
+const eventos = data.eventos.find(evento => evento.id == id)
 
 var texto = document.getElementById("idDetalle");
 
@@ -41,27 +37,7 @@ texto.innerHTML = `
 
 `;
 
-}
-  
-  )
-
-// for (var i = 0; i < eventos.length; i++){
-//   console.log(eventos[i])
-//   if (eventos[i].id == selectId) {
-//     detalleEvento.push(eventos[i]);
-    
-//   }
-
-
-//console.log(detalleEvento)
-
-
-
-
-
-
-
-//enlace a otra pagina
+})
 
 var navLink = document.getElementsByClassName("nav-link");
 
@@ -72,35 +48,6 @@ for (var i = 0; i < navLink.length; i++) {
     imprimir(e.target.id);
 
     document.getElementById("idDetalle").style.display = "none";
-    document.getElementById("titulo").style.display = "flex";
+    document.getElementById("todosLosEventos").style.display = "flex";
   });
 }
-
-
-// function detalles(array){
-
-// var cardDetalles;
-
-// for( var i = 0; i < array.length; i++){
-//     cardDetalles = 
-//     `
-//     <div class="container d-flex justify-content-center  align-item-center" >
-//     <div class="card col-md-8 " id="cartaDetalle">
-//       <div class="row g-0 ">
-//         <div class="col-md-6 imagen">
-//           <img src="../Images/${array[i].image}" class=" w-100 h-100 rounded" alt="${array[i].name}">
-//         </div>
-//         <div class="col-md-6">
-//           <div class="card-body">
-//             <h5 class="card-title">${array[i].name}</h5>
-//             <p class="card-text">${array[i].description}</p>
-//             <p class="card-text"><small class="text-muted">$ ${array[i].price}</small></p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-//     `;
-// }
-// document.getElementById("idDetalles").innerHTML = cardDetalles;
-// }

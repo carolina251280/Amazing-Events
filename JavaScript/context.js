@@ -1,5 +1,5 @@
 const initialState = {
-    paginaANavegar: "Home"
+    paginaANavegar: "home"
 }
 
  function setState(action, value) {

@@ -88,10 +88,10 @@ function imprimir() {
     case "past":
       let eventosPasados = eventos.filter(evento => evento.date < fechaBase)
       arrayAFiltrar = eventosPasados;
-      searchContainer.style.display = "flex"
+      searchContainer.style.display = "flex";
       todosLosEventos.style.display = "flex";
       idContacto.style.display = "none";
-      idEstadistica.style.display = "none"
+      idEstadistica.style.display = "none";
       inputSearch.value = "";
       checkCheckedBoxes = [];
       display(eventosPasados);
@@ -117,7 +117,7 @@ function imprimir() {
       searchContainer.style.display = "none"
       todosLosEventos.style.display = "none";
       idContacto.style.display = "none";
-      idEstadistica.style.display = "flex"
+      idEstadistica.style.display = "flex";
       initStats();
       estadistica();
       document.getElementById("tiempo").innerHTML = "Stats";
@@ -125,14 +125,14 @@ function imprimir() {
       break;
 
     default:
-      setState("paginaANavegar", "Home")
+      setState("paginaANavegar", "home");
       document.getElementById("tituloPrincipal").innerHTML = "Home";
       document.getElementById("tiempo").innerHTML = "Home";
       arrayAFiltrar = eventos;
-      searchContainer.style.display = "flex"
+      searchContainer.style.display = "flex";
       todosLosEventos.style.display = "flex";
-      idContacto.style.display = "none";
-      idEstadistica.style.display = "none"
+     idContacto.style.display = "none";
+      idEstadistica.style.display = "none";
       inputSearch.value = "";
       checkCheckedBoxes = [];
       display(eventos);
@@ -305,33 +305,38 @@ function estadistica() {
   document.getElementById("idEstadistica").innerHTML = estadistica;
 }
 
-var time = location.search.split("?time=");
+//var time = location.search;
+
+const timeQuerySearch = document.location.search
+//console.log(timeQuerySearch);
+const timeId = new URLSearchParams(timeQuerySearch)
 //console.log(time[1]);
 
-switch (time[1]) {
+switch (timeId) {
   case "upcoming":
-    document.getElementById("tituloPrincipal").innerHTML = "Upcoming Events";
+    //document.getElementById("tituloPrincipal").innerHTML = "Upcoming Events";
     imprimir("upcoming");
     break;
 
   case "past":
-    document.getElementById("tituloPrincipal").innerHTML = "Past Events";
+    //document.getElementById("tituloPrincipal").innerHTML = "Past Events";
     imprimir("past");
     break;
 
   case "contact":
-    document.getElementById("tituloPrincipal").innerHTML = "Contact";
+    //document.getElementById("tituloPrincipal").innerHTML = "Contact";
     imprimir("contact");
     break;
 
   case "stats":
-    document.getElementById("tituloPrincipal").innerHTML = "Stats";
+    //document.getElementById("tituloPrincipal").innerHTML = "Stats";
     imprimir("stats");
     break;
 
   default:
-    // if(document.getElementById("name") !== null){}
-    document.getElementById("tituloPrincipal").innerHTML = "Home";
+    setState("paginaANavegar", "home");
+  // if(document.getElementById("name") !== null){}
+    //document.getElementById("tituloPrincipal").innerHTML = "Home";
     imprimir("home");
 }
 
