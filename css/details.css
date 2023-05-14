@@ -26,3 +26,12 @@ main{
 .titulo {
     display: none;
   }
+
+  #todosLosEventos {
+    display: none;
+    
+  }
+  #idDetalles{
+    display:flex;}
+  
+

@@ -2,10 +2,9 @@ let fechaBase;
 
 let eventos;
 
-let modalComentario = document.getElementById("modalComentario")
-
+let modalComentario = document.getElementById("modalComentario");
 var inputSearch = document.getElementById("inputSearch");
-
+console.log(todosLosEventos);
 let checkCheckedBoxes = [];
 let search = "";
 
@@ -38,7 +37,7 @@ var buttonNav = document.getElementsByClassName("nav-link"); //busca los element
 for (var i = 0; i < buttonNav.length; i++) {
 const element = buttonNav[i];
   textoBoton.push(buttonNav[i].innerText);
-  //console.log(textoBoton)
+  console.log(textoBoton)
 
   element.addEventListener("click", (e) => {
     setState("paginaANavegar", e.target.id)
@@ -91,7 +90,7 @@ function imprimir() {
       searchContainer.style.display = "flex"
       todosLosEventos.style.display = "flex";
       idContacto.style.display = "none";
-      idEstadistica.style.display = "none"
+      idEstadistica.style.display = "none";
       inputSearch.value = "";
       checkCheckedBoxes = [];
       display(eventosPasados);
@@ -100,33 +99,31 @@ function imprimir() {
       //document.getElementById("tituloPrincipal").innerHTML = "Past Events";
       break;
     case "contact":
-      searchContainer.style.display = "none"
+      searchContainer.style.display = "none";
       todosLosEventos.style.display = "none";
       idContacto.style.display = "flex";
-      idEstadistica.style.display = "none"
+      console.log(idContacto)
+      idEstadistica.style.display = "none";
       formulario();
-      let form = document.querySelector("form");
-      form.addEventListener("submit", function (event) {
-        actionForm(event);
-      });
+      //display();
 
       document.getElementById("tiempo").innerHTML = "Contact";
       break;
 
     case "stats":
-      searchContainer.style.display = "none"
+      searchContainer.style.display = "none";
       todosLosEventos.style.display = "none";
       idContacto.style.display = "none";
-      idEstadistica.style.display = "flex"
+      idEstadistica.style.display = "flex";
+      
       initStats();
       estadistica();
-      document.getElementById("tiempo").innerHTML = "Stats";
+      //display()
 
+      document.getElementById("tiempo").innerHTML = "Stats";
       break;
 
     default:
-      setState("paginaANavegar", "Home")
-      document.getElementById("tituloPrincipal").innerHTML = "Home";
       document.getElementById("tiempo").innerHTML = "Home";
       arrayAFiltrar = eventos;
       searchContainer.style.display = "flex"
@@ -137,8 +134,6 @@ function imprimir() {
       checkCheckedBoxes = [];
       display(eventos);
       eventosCategories(eventos);
-      
-    
   }
 }
 
@@ -148,7 +143,6 @@ function display(array) {
   var url;
   if (location.pathname == "./pages/details.html") {
     url = "./details.html";
-    imageUrl = "../Images/";
   } else {
     url = "./pages/details.html";
     //imageUrl = "./Images/";
@@ -173,17 +167,15 @@ function display(array) {
       </div>
     </div>
   </div>
-  `
+  `)
  
-    )
- 
-    
   //En detalle se esta enviando un parametro a la url
-
-  document.getElementById("todosLosEventos").innerHTML = html; //una vez que el array esta recorrido y todo está guardado en el array html, se llama a este método para que
+  document.getElementById("todosLosEventos").innerHTML = html; 
+  let form = document.querySelector("form");
+      form.addEventListener("submit", function (event) {
+        actionForm(event);
+      });//una vez que el array esta recorrido y todo está guardado en el array html, se llama a este método para que
 }
-
-//imprimir("home"); //se llama a esta funcion para que cargue por primera vez la página sin hacerle click
 
 //Página de contactos
 
@@ -214,15 +206,13 @@ function formulario() {
     </div>
 
     <div class="boton_form">
-        <input  class="boton_submit"  type="submit" value="Enviar!!!" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <input  class="boton_submit" type="submit" value="Enviar!!!" data-bs-toggle="modal" data-bs-target="#exampleModal">
     </div>
 </form>
-`;
+`
 
   document.getElementById("idContacto").innerHTML = formulary;
 
-
-  //console.log("Ocultar las Cards o Estadisticas y va a mostrar el formulario de contactos")
 }
 
 //Funcion que crea la tabla de estadística.
@@ -300,43 +290,37 @@ function estadistica() {
   <td>42.756</td>
 </tr> -->
 </table>
-   `;
-
+   `
   document.getElementById("idEstadistica").innerHTML = estadistica;
 }
 
 var time = location.search.split("?time=");
-//console.log(time[1]);
-
+console.log(time[1]);
 switch (time[1]) {
+  
   case "upcoming":
+    setState("paginaANavegar", "upcoming")
     document.getElementById("tituloPrincipal").innerHTML = "Upcoming Events";
-    imprimir("upcoming");
     break;
 
   case "past":
+    setState("paginaANavegar", "past")
     document.getElementById("tituloPrincipal").innerHTML = "Past Events";
-    imprimir("past");
     break;
 
   case "contact":
+    setState("paginaANavegar", "contact")
     document.getElementById("tituloPrincipal").innerHTML = "Contact";
-    imprimir("contact");
     break;
 
   case "stats":
+    setState("paginaANavegar", "stats")
     document.getElementById("tituloPrincipal").innerHTML = "Stats";
-    imprimir("stats");
     break;
 
   default:
-    // if(document.getElementById("name") !== null){}
     document.getElementById("tituloPrincipal").innerHTML = "Home";
-    imprimir("home");
 }
-
-
-
 
 //carrusel
 
@@ -370,56 +354,26 @@ botonRight.addEventListener("click", function (e) {
   }
 });
 
-function changePage(i) {
-  
+async function changePage(i) {
+  console.log(changePage)
   switch (i) {
     case 0:
-      display(eventos);
-      eventosCategories(eventos);
-      searchContainer.style.display = "flex";
-      todosLosEventos.style.display = "flex";
-      idContacto.style.display = "none";
-      idEstadistica.style.display = "none";
+      await setState("paginaANavegar", "home")
+     imprimir();
       document.getElementById("tituloPrincipal").innerHTML = textoBoton[i];
-      buttonNav[0].classList.add("activo");
-      buttonNav[1].classList.remove("activo");
-      buttonNav[2].classList.remove("activo");
-      buttonNav[3].classList.remove("activo");
-      buttonNav[4].classList.remove("activo");
-      
-
-
       break;
 
     case 1:
-      display(eventosFuturos);
-      eventosCategories(eventosFuturos);
-      searchContainer.style.display = "flex";
-      todosLosEventos.style.display = "flex";
-      idContacto.style.display = "none";
-      idEstadistica.style.display = "none";
+     
+     await setState("paginaANavegar", "upcoming")
+     imprimir();
       document.getElementById("tituloPrincipal").innerHTML = textoBoton[i];
-      buttonNav[0].classList.remove("activo");
-      buttonNav[1].classList.add("activo");
-      buttonNav[2].classList.remove("activo");
-      buttonNav[3].classList.remove("activo");
-      buttonNav[4].classList.remove("activo");
       break;
 
     case 2:
-      display(eventosPasados);
-      eventosCategories(eventosPasados);
-      searchContainer.style.display = "flex";
-      todosLosEventos.style.display = "flex";
-      idContacto.style.display = "none";
-      idEstadistica.style.display = "none";
+      await setState("paginaANavegar", "past")
+      imprimir();
       document.getElementById("tituloPrincipal").innerHTML = textoBoton[i];
-      buttonNav[0].classList.remove("activo");
-      buttonNav[1].classList.remove("activo");
-      buttonNav[2].classList.add("activo");
-      buttonNav[3].classList.remove("activo");
-      buttonNav[4].classList.remove("activo");
-      //searchContainer[0].classList.remove("searchContainer");
       break;
 
     case 3:
@@ -429,12 +383,6 @@ function changePage(i) {
       idEstadistica.style.display = "none";
       searchContainer.style.display = "none";
       document.getElementById("tituloPrincipal").innerHTML = textoBoton[i];
-      buttonNav[0].classList.remove("activo");
-      buttonNav[1].classList.remove("activo");
-      buttonNav[2].classList.remove("activo");
-      buttonNav[3].classList.add("activo");
-      buttonNav[4].classList.remove("activo");
-      //searchContainer[0].classList.remove("searchContainer");
       break;
 
     case 4:
@@ -445,12 +393,6 @@ function changePage(i) {
       idContacto.style.display = "none";
       idEstadistica.style.display = "flex";
       document.getElementById("tituloPrincipal").innerHTML = textoBoton[i];
-      buttonNav[0].classList.remove("activo");
-      buttonNav[1].classList.remove("activo");
-      buttonNav[2].classList.remove("activo");
-      buttonNav[3].classList.remove("activo");
-      buttonNav[4].classList.add("activo");
-      //searchContainer[0].classList.remove("searchContainer");
       break;
   }
 }
@@ -459,14 +401,12 @@ function changePage(i) {
 
 inputSearch.addEventListener("keyup", function (evento) {
   var datoInput = evento.target.value;
-
   //A los capturado le quito espacios en blanco anteriores y posteriores con trim()
   //Además a lo ingresado lo paso a minusculsa con toLowerCase()
 
   search = datoInput.trim().toLowerCase();
   console.log(search)
   console.log(datoInput)
-
   filtroCombinado();
 });
 
@@ -568,6 +508,4 @@ function filtroCombinado() {
     ? display(filtrado)
     : (todosLosEventos.innerHTML = `<h1 class="ceroResult">No se encontraron los vinos para tu búsqueda </h1>`);
 }
-// setTimeout(function(){
-//   alert("!Eventos Increibles!");
-// }, <PacmanLoader color="#36d7b7" />2000);
+
