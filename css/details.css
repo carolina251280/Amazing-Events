@@ -31,4 +31,7 @@ main{
     display: none;
     
   }
+  #idDetalles{
+    display:flex;}
+  
 
