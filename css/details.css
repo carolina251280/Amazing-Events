@@ -1,37 +1,70 @@
-html{
-    width: 100% !important;
-    height: 100vh !important;
-}
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100% !important;    
+main {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: auto;
 }
 
-main{
-    height: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: auto;
+.imagen-detalles {
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  background: linear-gradient(
+    109.6deg,
+    rgba(116, 18, 203, 1) 11.2%,
+    rgba(230, 46, 131, 1) 91.2%
+  );
 }
 
-.card-title{
-    font-family: 'Anton', sans-serif;
+.card-title {
+  font-family: "Anton", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
 }
-.card-text{
-    font-family: 'Questrial', sans-serif;
+.card-text,
+.text-muted {
+  font-family: "Questrial", sans-serif;
+  font-size: 1rem;
+  color: black !important;
+}
+
+.content-boton-reserva {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.boton-reserva {
+  background: linear-gradient(
+    109.6deg,
+    rgba(116, 18, 203, 1) 11.2%,
+    rgba(230, 46, 131, 1) 91.2%
+  );
+  color: white;
+  border: none;
+  padding: 0.5rem;
+}
+.boton-reserva:hover {
+  background: #ff006a;
+  color: white;
+}
+
+#idDetalles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 .titulo {
-    display: none;
-  }
+  display: none;
+}
 
-  #todosLosEventos {
-    display: none;
-    
-  }
-  #idDetalles{
-    display:flex;}
-  
-
+#todosLosEventos {
+  display: none;
+}
