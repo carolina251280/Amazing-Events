@@ -1,0 +1,11 @@
+Entrega Proyecto Amazing Events
+
+Alumna: Carolina Marquez
+
+*Repositorio GitHub:
+
+https://github.com/carolina251280/Amazing-Events.git
+
+
+*URL Firebase:
+https://amazing-events-proyecto.web.app/
